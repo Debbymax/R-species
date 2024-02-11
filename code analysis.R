@@ -5,7 +5,7 @@ library(ggplot2)
 library(moments)
 
 #How are the species different from the two periods
-#1) null hypothesis: there aren't different
+#1) null hypothesis: they aren't different
 #2) there is a significant difference.
 
 
@@ -20,7 +20,7 @@ prop_sp$dominantLandClass <- as.factor(prop_sp$dominantLandClass)
 #Getting my randomly allocated taxonomic group
 BD7<- select(prop_sp, -c(1,5,7,9,12,13,14))
 BD4<- select(prop_sp, c(5,7,9,12))
-#Taking the mean for proportional specie richness for my BD7
+#Taking the mean for proportional species richness for my BD7
 BD7$BD7mean <- rowMeans(BD7[1:7])
 
 #Data Exploration
@@ -29,12 +29,12 @@ BD7$BD7mean <- rowMeans(BD7[1:7])
 eco_period <- prop_sp%>%pull(period)
 par(mfrow=c(1, 1))
 skewness(BD7$Bees)
-hist(BD7$Bees) # Here a bulk of the species fall between 0.2 and 1.0 with highest being over a thousand
+hist(BD7$Bees) # Here a bulk of the species fall between 0.2 and 1.0 with the highest being over a thousand
 summary(BD7$Bees)
 bm<-mean(BD7$Bees,trim=0.1) # trim to extract outliers and normalize the distribution
 boxplot(BD7$Bees) 
 plot(BD7$Bees~eco_period)
-#Difference between the two period for this specie
+#Difference between the two periods for this species
 hist(BD7%>%filter(period=="Y70")%>%pull(Bees),
      xlab="Bees70 Mean",
      main="Y70 Mean");hist(BD7%>%filter(period=="Y00")%>%pull(Bees),
